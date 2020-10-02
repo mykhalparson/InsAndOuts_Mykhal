@@ -52,14 +52,14 @@ skate[4] = loadImage ("skate5.png");
 
 
 void draw() { 
-
+  
+ 
   //background color changes, board is leveled
   if (mousePressed) {
 
     background(r, g, b);
     
     //prints a skate picture on screen 
-    imageMode(CENTER);
     image(skate[randomPic], width/3, height/3, 150,150);
     println (randomPic);
     
@@ -173,14 +173,13 @@ void draw() {
     }
     
     //prints a skate picture on screen 
-    imageMode(CENTER);
-    image(skate[randomPic], width/3, height/3, 150,150);
+    image(skate[randomPic], width/3, height/3, 125, 125);
     println (randomPic);
   }
-
   //image is placed in the top left, then resized
   image(img1, 5, 0);
   img1.resize(300, 150);
+
 }
 
 
