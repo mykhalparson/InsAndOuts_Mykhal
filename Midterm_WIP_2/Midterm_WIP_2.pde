@@ -8,6 +8,13 @@
 String state = "StartScreen";
 
 PImage img1;
+PImage img2;
+PImage img3;
+PImage img4;
+PImage img5;
+PImage img6;
+PImage img7;
+
 PFont font;
 PShape board;
 PImage [] skate = new PImage [5]; //Five different skateboard PNGs
@@ -42,6 +49,11 @@ void setup () {
 
   //PNG image loads
   img1 = loadImage("Thps2.png");
+  img2 = loadImage("coin.png");
+  img3 = loadImage("coin.png");
+  img4 = loadImage("coin.png");
+  img5 = loadImage("coin.png");
+  img6 = loadImage("coin.png");
   
   skate[0] = loadImage ("skate1.png");
   skate[1] = loadImage ("skate2.png");
@@ -57,6 +69,8 @@ void draw() {
      background (255,165,0);
      textSize(40);
      text("START", width-610, height/2);
+     textSize(30);
+     text("High Score: 150", width-660, (height/2)+100);
    } else if (state=="Game"){
    
   //background color changes, board is leveled
@@ -65,7 +79,7 @@ void draw() {
     background(r, g, b);
     
     //prints a skate picture on screen 
-    image(skate[randomPic], width/3, height/3, 150,150);
+    image(skate[randomPic], width/3, height/3, 100,100);
     println (randomPic);
     
     //Higher Box: rect (x1, y1, width, height);
@@ -99,28 +113,45 @@ void draw() {
     circle(515, 415, rad);
 
     fill(0, 255, 0);
+    
+    //"score: 0"
+    fill(0);
+    textSize(25);
+    text("Score: 0", 950, 24, 200, 200);
+    
     //creates "bridge"
+    fill(255,0,0);
     for (float i = 515; i<730; i+=25) {
       //square(firstwheel, firstwheel-87, 25);
       square(i-50, firstwheel-87, 25);
-   
+  
+  //loads coins
+  image(img2, 100, 387);
+  img2.resize(45,45);
+  image(img3, 250, 387);
+  img3.resize(45,45);
+  image(img4, 400, 387);
+  img4.resize(45,45);
+  image(img5, 650, 387);
+  img5.resize(45,45);
+  image(img6, 900, 387);
+  img6.resize(45,45);
     }
   } else {
 
-    // MAIN SKATEBOARD
     background(0, 250, 100);
 
     //"score: 0"
     fill(0);
     textSize(25);
-    text("Score: 0", 950, 24, 200, 200);
+    //text("Score: 0", 950, 24, 200, 200);
 
     if (mouseX > width/2 && mouseY < height/2) {
     background(b+15, g+15, r+15);
     //"score: 0"
     fill(0);
     textSize(25);
-    text("Score: 0", 950, 24, 200, 200);
+    //text("Score: 0", 950, 24, 200, 200);
     shape(board, 300,25);
     }
 
@@ -129,7 +160,7 @@ void draw() {
     //"score: 0"
     fill(0);
     textSize(25);
-    text("Score: 0", 950, 24, 200, 200);
+    //text("Score: 0", 950, 24, 200, 200);
 
     }
 
@@ -165,73 +196,106 @@ void draw() {
     rect(700, 620, 480, 200);
 
     newSkateboard();
-
     fill(0, 255, 0);
-    //creates "bridge"
     }
+   
+   if (mousePressed && mouseX<(width/2)-100) {
+
+    background(0,255,100);
+    newSkateboard();
+
     
+        
+    for (float i = 0; i<1200; i+=25) {
+      //square(firstwheel, firstwheel-87, 25);
+      
+      fill(255,0,0);
+      square(i, firstwheel-87, 25);
+
+      // text added 
+      fill(0);
+      textSize(25);
+      text("Score: 300", 950, 24, 200, 200);
+        }
+  }
     if (mousePressed && mouseX>width-394) {
 
-    background(255);
-
-    //Higher Box: rect (x1, y1, width, height);
-    fill(255);
-    rect(0, 550, 450, 350);
-
-    //Lower Box: rect (x1, y1, width, height);
-    fill(0);
-    rect(700, 620, 480, 200);
+    background(0,255,100);
 
     newSkateboard2();
-
-    fill(0, 255, 0);
-    //creates "bridge"
-    for (float i = 515; i<1200; i+=25) {
-      //square(firstwheel, firstwheel-87, 25);
-      square(i-50, firstwheel-87, 25);
-
+       
+      fill(0);
       // text added 
       textSize(25);
       text("Score: 100", 950, 24, 200, 200);
+      
+      fill(0, 255, 0);
+      //creates "bridge"
+      for (float i = 515; i<1200; i+=25) {
+      fill(255, 0, 0);
+      //square(firstwheel, firstwheel-87, 25);
+      square(i-50, firstwheel-87, 25);
+    }
     }
     if (mousePressed && mouseX>width-280) {
-    background(255);
-    newSkateboard3();
-    fill(0, 255, 100);
+      background(0,255,100);
+      newSkateboard3();
+      fill(0, 255, 100);
     }
     if (mousePressed && mouseX>width-180) {
-    background(255);
-    newSkateboard4();
-    fill(0, 255, 100);
+      background(0,255,100);
+      newSkateboard4();
+      fill(0, 255, 100);
     }    
     if (mousePressed && mouseX>width-80) {
-    background(255);
-    newSkateboard5();
-    fill(0, 255, 100);
+      background(0,255,100);
+      newSkateboard5();
+      fill(0, 255, 100);
+    } 
+      if (mousePressed && mouseX<421) {
+      background(0,255,100);
+      leftSideSkate();
+      fill(0, 255, 100);
+      for (float i = 0; i<1200; i+=25) {
+      fill(255, 0, 0);
+      //square(firstwheel, firstwheel-87, 25);
+      square(i-50, firstwheel-87, 25);
     }
-    
-    
+    }
+    if (mousePressed && mouseX<268) {
+      background(0,255,100);
+      leftSideSkate2();
+      fill(0, 255, 100);
+    }
+    if (mousePressed && mouseX<121) {
+      background(0,255,100);
+      leftSideSkate3();
+      fill(0, 255, 100);
+    }
+   
     //prints a skate picture on screen 
-    image(skate[randomPic], width/3, height/3, 125, 125);
+    image(skate[randomPic], width/3, height/3, 100, 100);
     println (randomPic);
     
-    /*ends sketch
-    if(mousePressed && mouseX>1000){
+    //ends sketch
+    if(mousePressed && mouseX<-120){
       state="End";
     }
   } else if (state=="End"){
        background(0);
-       text("Click to restart!", width/2, height/2);
-   }*/
-  //image is placed in the top left, then resized
-  }
+       text("New High Score! Click to restart!", (width/2)-200, height/2);
+   }
   image(img1, 5, 0);
   img1.resize(250, 125);
   println(state);
   println(mouseX);
-  }
+  //image is placed in the top left, then resized
   }
 
+
+  
+ 
+   
 //functions
 void mousePressed(){
   randomPic = int(random(skate.length));
@@ -241,6 +305,8 @@ void mousePressed(){
     state= "StartScreen";
   }
 }
+
+// -------------------------------------------
 
 //functions for skateboards AND rectangles
 void makeSkateboard(){
@@ -297,31 +363,38 @@ void newSkateboard(){
   strokeWeight(3.25);
   line (mouseX, 400, mouseX+120, 400);
 
-    //new skateboard tail (left)
+ /*   //new skateboard tail (left)
     line (485, 385, 500, 400);
 
     //new skateboard tail (right)
     line (620, 400, 635, 385);
-
+*/
     //wheel1 (right)
     //circle(x, y, radius)
     strokeWeight(2);
     fill(255, 0, 0);
-    circle(605, 415, rad);
+    circle(mouseX+100, 415, rad);
 
     //wheel2 (left)
     //circle(x, y, radius)
     strokeWeight(2);
     fill(255, 0, 0);
-    circle(515, 415, rad);
+    circle(mouseX, 415, rad);
+    
+  //loads coins
+  image(img2, 100, 387);
+  img2.resize(45,45);
+  image(img3, 250, 387);
+  img3.resize(45,45);
+  image(img4, 400, 387);
+  img4.resize(45,45);
+  image(img6, 900, 387);
+  img6.resize(45,45);
     
     for (float i = 515; i<1200; i+=25) {
       //square(firstwheel, firstwheel-87, 25);
+      fill(255,0,0);
       square(i-50, firstwheel-87, 25);
-
-      // text added 
-      textSize(25);
-      text("Score: 50", 950, 24, 200, 200);
     }
 }
 void newSkateboard2(){
@@ -338,30 +411,41 @@ void newSkateboard2(){
     strokeWeight(3.25);
     line (mouseX, 400, mouseX+120, 400);
 
-    //new skateboard tail (left)
+/*    //new skateboard tail (left)
     line (485, 385, 500, 400);
 
     //new skateboard tail (right)
-    line (620, 400, 635, 385);
-
+    line (620, mouseY, 635, 385);
+*/
     //wheel1 (right)
     //circle(x, y, radius)
     strokeWeight(2);
     fill(255, 0, 0);
-    circle(710, 415, rad);
+    circle(mouseX+90, 415, rad);
 
     //wheel2 (left)
     //circle(x, y, radius)
     strokeWeight(2);
     fill(255, 0, 0);
-    circle(620, 415, rad);
+    circle(mouseX, 415, rad);
+    
+  //loads coins
+  image(img2, 100, 387);
+  img2.resize(45,45);
+  image(img3, 250, 387);
+  img3.resize(45,45);
+  image(img4, 400, 387);
+  img4.resize(45,45);
+
     
     for (float i = 515; i<1200; i+=25) {
     //square(firstwheel, firstwheel-87, 25);
+    fill(255,0,0);
     square(i-50, firstwheel-87, 25);
 
     // text added 
     textSize(25);
+    fill(0);
     text("Score: 100", 950, 24, 200, 200);
     }
 }
@@ -374,33 +458,45 @@ void newSkateboard3(){
   //Lower Box: rect (x1, y1, width, height);
     fill(0);
     rect(700, 620, 480, 200);
-      //skateboard middle
+    
+   //skateboard middle
     strokeWeight(3.25);
     line (mouseX, 400, mouseX+120, 400);
 
-    //new skateboard tail (left)
+ /*   //new skateboard tail (left)
     line (485, 385, 500, 400);
 
     //new skateboard tail (right)
     line (620, 400, 635, 385);
+*/
 
     //wheel1 (right)
     //circle(x, y, radius)
     strokeWeight(2);
     fill(255, 0, 0);
-    circle(815, 415, rad);
+    circle(mouseX+90, 415, rad);
 
     //wheel2 (left)
     //circle(x, y, radius)
     strokeWeight(2);
     fill(255, 0, 0);
-    circle(725, 415, rad);
+    circle(mouseX, 415, rad);
+    
+  //loads coins
+  image(img2, 100, 387);
+  img2.resize(45,45);
+  image(img3, 250, 387);
+  img3.resize(45,45);
+  image(img4, 400, 387);
+  img4.resize(45,45);
     
     for (float i = 515; i<1200; i+=25) {
     //square(firstwheel, firstwheel-87, 25);
+    fill(255,0,0);
     square(i-50, firstwheel-87, 25);
 
     // text added 
+    fill(0);
     textSize(25);
     text("Score: 150", 950, 24, 200, 200);
     }
@@ -418,29 +514,41 @@ void newSkateboard4(){
     strokeWeight(3.25);
     line (mouseX, 400, mouseX+120, 400);
 
-    //new skateboard tail (left)
+ /*   //new skateboard tail (left)
     line (485, 385, 500, 400);
 
     //new skateboard tail (right)
     line (620, 400, 635, 385);
+*/
 
     //wheel1 (right)
     //circle(x, y, radius)
     strokeWeight(2);
     fill(255, 0, 0);
-    circle(920, 415, rad);
+    circle(mouseX+90, 415, rad);
 
     //wheel2 (left)
     //circle(x, y, radius)
     strokeWeight(2);
     fill(255, 0, 0);
-    circle(830, 415, rad);
+    circle(mouseX, 415, rad);
+    
+    //loads coins
+    image(img2, 100, 387);
+    img2.resize(45,45);
+    image(img3, 250, 387);
+    img3.resize(45,45);
+    image(img4, 400, 387);
+    img4.resize(45,45);
+
 
     for (float i = 515; i<1200; i+=25) {
     //square(firstwheel, firstwheel-87, 25);
+    fill(255,0,0);
     square(i-50, firstwheel-87, 25);
 
     // text added 
+    fill(0);
     textSize(25);
     text("Score: 200", 950, 24, 200, 200);
     }
@@ -452,36 +560,187 @@ void newSkateboard5(){
   rect(0, 550, 450, 350);
 
   //Lower Box: rect (x1, y1, width, height);
-    fill(0);
-    rect(700, 620, 480, 200);
-      //skateboard middle
-    strokeWeight(3.25);
+   fill(0);
+   rect(700, 620, 480, 200);
+   //skateboard middle
+   strokeWeight(3.25);
    line (mouseX, 400, mouseX+120, 400);
 
-    //new skateboard tail (left)
+/*    //new skateboard tail (left)
     line (485, 385, 500, 400);
 
     //new skateboard tail (right)
     line (620, 400, 635, 385);
+*/
 
     //wheel1 (right)
     //circle(x, y, radius)
     strokeWeight(2);
     fill(255, 0, 0);
-    circle(1025, 415, rad);
+    circle(mouseX+90, 415, rad);
 
     //wheel2 (left)
     //circle(x, y, radius)
     strokeWeight(2);
     fill(255, 0, 0);
-    circle(935, 415, rad);
+    circle(mouseX, 415, rad);
     
-        for (float i = 515; i<1200; i+=25) {
+    //loads coins
+    image(img2, 100, 387);
+    img2.resize(45,45);
+    image(img3, 250, 387);
+    img3.resize(45,45);
+    image(img4, 400, 387);
+    img4.resize(45,45);
+    
+    for (float i = 515; i<1200; i+=25) {
     //square(firstwheel, firstwheel-87, 25);
+    fill(255,0,0);
     square(i-50, firstwheel-87, 25);
 
     // text added 
+    fill(0);
     textSize(25);
     text("Score: 250", 950, 24, 200, 200);
-    }
+    } 
 }
+void leftSideSkate(){
+       
+  //Higher Box: rect (x1, y1, width, height);
+  fill(255);
+  rect(0, 550, 450, 350);
+
+  //Lower Box: rect (x1, y1, width, height);
+   fill(0);
+   rect(700, 620, 480, 200);
+   //skateboard middle
+   strokeWeight(3.25);
+   line (mouseX, 400, mouseX+120, 400);
+
+/*    //new skateboard tail (left)
+    line (485, 385, 500, 400);
+
+    //new skateboard tail (right)
+    line (620, 400, 635, 385);
+*/
+
+    //wheel1 (right)
+    //circle(x, y, radius)
+    strokeWeight(2);
+    fill(255, 0, 0);
+    circle(mouseX+90, 415, rad);
+
+    //wheel2 (left)
+    //circle(x, y, radius)
+    strokeWeight(2);
+    fill(255, 0, 0);
+    circle(mouseX, 415, rad);
+    
+    //loads coins
+    image(img2, 100, 387);
+    img2.resize(45,45);
+    image(img3, 250, 387);
+    img3.resize(45,45);
+    
+    for (float i = 0; i<1200; i+=25) {
+    //square(firstwheel, firstwheel-87, 25);
+    fill(255,0,0);
+    square(i-50, firstwheel-87, 25);
+
+    // text added 
+    fill(0);
+    textSize(25);
+    text("Score: 350", 950, 24, 200, 200);
+     }
+}
+     void leftSideSkate2(){
+       
+  //Higher Box: rect (x1, y1, width, height);
+  fill(255);
+  rect(0, 550, 450, 350);
+
+  //Lower Box: rect (x1, y1, width, height);
+   fill(0);
+   rect(700, 620, 480, 200);
+   //skateboard middle
+   strokeWeight(3.25);
+   line (mouseX, 400, mouseX+120, 400);
+
+/*    //new skateboard tail (left)
+    line (485, 385, 500, 400);
+
+    //new skateboard tail (right)
+    line (620, 400, 635, 385);
+*/
+
+    //wheel1 (right)
+    //circle(x, y, radius)
+    strokeWeight(2);
+    fill(255, 0, 0);
+    circle(mouseX+90, 415, rad);
+
+    //wheel2 (left)
+    //circle(x, y, radius)
+    strokeWeight(2);
+    fill(255, 0, 0);
+    circle(mouseX, 415, rad);
+    
+    //loads coins
+    image(img2, 100, 387);
+    img2.resize(45,45);
+    
+    for (float i = 0; i<1200; i+=25) {
+    //square(firstwheel, firstwheel-87, 25);
+    fill(255,0,0);
+    square(i-50, firstwheel-87, 25);
+
+    // text added 
+    fill(0);
+    textSize(25);
+    text("Score: 400", 950, 24, 200, 200);
+     }
+  }  
+  
+  
+  void leftSideSkate3(){
+       
+  //Higher Box: rect (x1, y1, width, height);
+  fill(255);
+  rect(0, 550, 450, 350);
+
+  //Lower Box: rect (x1, y1, width, height);
+   fill(0);
+   rect(700, 620, 480, 200);
+   //skateboard middle
+   strokeWeight(3.25);
+   line (mouseX, 400, mouseX+120, 400);
+
+/*    //new skateboard tail (left)
+    line (485, 385, 500, 400);
+
+    //new skateboard tail (right)
+    line (620, 400, 635, 385);
+*/
+
+    //wheel1 (right)
+    //circle(x, y, radius)
+    strokeWeight(2);
+    fill(255, 0, 0);
+    circle(mouseX+90, 415, rad);
+
+    //wheel2 (left)
+    //circle(x, y, radius)
+    strokeWeight(2);
+    fill(255, 0, 0);
+    circle(mouseX, 415, rad);
+    
+      for (float i = 0; i<1200; i+=25) {
+      fill(255, 0, 0);
+      //square(firstwheel, firstwheel-87, 25);
+      square(i-50, firstwheel-87, 25);
+    }
+     // text added 
+    fill(0);
+    textSize(25);
+    text("Score: 500", 950, 24, 200, 200);
+  }
