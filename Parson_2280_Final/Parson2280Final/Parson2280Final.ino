@@ -1,6 +1,4 @@
-/*Code Borrowed & modified from http://duinos.net/files/2015/common_anode_4digit_7_segment_led_display.ino
-
-
+/*Code Borrowed (Anything with PinMode A-G and D1-D4) & modified from http://duinos.net/files/2015/common_anode_4digit_7_segment_led_display.ino
 /*  A
    ---
 F |   | B
@@ -9,11 +7,17 @@ F |   | B
 E |   | C
   |   |
    ---
-    D
-
+    D 
 Val & serial begin borrowed from MTEC 2280W/F SS8 Demo
+
+//FSR Help (fsrReading & serial print) & code Structure from: https://www.instructables.com/Interfacing-Force-Sensitive-Resistor-to-Arduino/
 */
-byte val; //Processing to Arduino data
+//FORCE IS IN SERIAL MONITOR
+
+byte val;
+int fsr = 0;
+int fsrReading;
+
 int LED1 = 1;
 int pinA = 2;
 int pinB = 3;
@@ -22,14 +26,17 @@ int pinD = 5;
 int pinE = 6;
 int pinF = 7;
 int pinG = 8;
-int D1 = 9;
-int D2 = 10;
+//int D1 = 9;
+//int D2 = 10;
 int D3 = 11;
 int D4 = 12;
 
 // the setup routine runs once when you press reset:
-void setup() {                
-  // initialize the digital pins as outputs.
+void setup() {     
+
+
+
+  //initialize the digital pins as outputs.
   pinMode(pinA, OUTPUT);     
   pinMode(pinB, OUTPUT);     
   pinMode(pinC, OUTPUT);     
@@ -37,8 +44,8 @@ void setup() {
   pinMode(pinE, OUTPUT);     
   pinMode(pinF, OUTPUT);     
   pinMode(pinG, OUTPUT);   
-  pinMode(D1, OUTPUT);  
-  pinMode(D2, OUTPUT);  
+ // pinMode(D1, OUTPUT);  
+ // pinMode(D2, OUTPUT);  
   pinMode(D3, OUTPUT);  
   pinMode(D4, OUTPUT);
   Serial.begin(9600); // Start serial communication at 9600 bps
@@ -50,27 +57,35 @@ void loop() {
     val = Serial.read(); // read it and store it in val
   }
 
+  fsrReading = analogRead(fsr); 
   if(val==0){
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+  //
+  Serial.print("\nForce = ");
+  Serial.print(fsrReading); 
+  delay(500); 
+  
   digitalWrite(D3, HIGH);
   digitalWrite(D4, HIGH); 
-  
   digitalWrite(pinA, LOW);   
   digitalWrite(pinB, LOW);   
   digitalWrite(pinC, LOW);   
   digitalWrite(pinD, LOW);   
   digitalWrite(pinE, LOW);   
   digitalWrite(pinF, LOW);   
-  digitalWrite(pinG, LOW);   
+  digitalWrite(pinG, LOW);  
+
+
   }
 
   else if(val==1){
-   
-  //20
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+  Serial.print("Force = \t");
+  Serial.print(fsrReading);  
+  delay(500);  
+
+  
+  
+  //20
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH); 
   
@@ -83,8 +98,8 @@ void loop() {
   digitalWrite(pinG, HIGH);   
   delay(250); 
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+  ////////
+  ////
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -99,8 +114,8 @@ void loop() {
   
 
 //19
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+  ////////
+  ////
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH); 
 
@@ -114,8 +129,8 @@ void loop() {
 
   delay(250); 
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+  ////////
+  ////
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -131,8 +146,8 @@ void loop() {
 //18
 
   delay(10);
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+  ////////
+  ////
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH); 
 
@@ -146,8 +161,7 @@ void loop() {
 
   delay(250); 
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+  
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -162,8 +176,7 @@ void loop() {
 
 
 //17
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH); 
 
@@ -177,8 +190,7 @@ void loop() {
 
   delay(250); 
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
 
@@ -193,8 +205,7 @@ void loop() {
 
 //16
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH); 
 
@@ -208,8 +219,7 @@ void loop() {
 
   delay(250); 
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
   
@@ -224,8 +234,7 @@ void loop() {
   
 //15
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH); 
 
@@ -239,8 +248,7 @@ void loop() {
 
   delay(250); 
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
   
@@ -255,8 +263,7 @@ void loop() {
 
 //14
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH); 
 
@@ -270,8 +277,7 @@ void loop() {
 
   delay(250); 
   
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -287,8 +293,7 @@ void loop() {
 
 //13
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH); 
 
@@ -302,8 +307,6 @@ void loop() {
 
   delay(250); 
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
   
@@ -318,8 +321,7 @@ void loop() {
 
 //12
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH); 
 
@@ -333,8 +335,7 @@ void loop() {
 
   delay(250); 
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
   
@@ -350,8 +351,7 @@ void loop() {
 
   //11
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, LOW);
   digitalWrite(D4, LOW); 
 
@@ -365,8 +365,7 @@ void loop() {
   delay(1000); 
 
 //10
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+  
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH); 
 
@@ -380,8 +379,7 @@ void loop() {
 
   delay(250); 
 
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -396,8 +394,7 @@ void loop() {
 
 
  //9
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -411,8 +408,7 @@ void loop() {
   delay(1000); 
 
  //8
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -426,8 +422,7 @@ void loop() {
   delay(1000); 
 
 //7
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
 
@@ -442,8 +437,7 @@ void loop() {
  
 
 //6
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
   
@@ -458,8 +452,7 @@ void loop() {
 
 
 //5
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
   
@@ -474,8 +467,7 @@ void loop() {
 
 
 //4
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -489,8 +481,7 @@ void loop() {
   delay(1000); 
 
 //3
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -505,8 +496,8 @@ void loop() {
 
 
 //2
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
+  ////////
+  ////
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
   
@@ -520,8 +511,6 @@ void loop() {
   delay(1000); 
 
 //1
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
 
@@ -535,8 +524,6 @@ void loop() {
   delay(1000); 
 
  //0
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -547,12 +534,9 @@ void loop() {
   digitalWrite(pinE, HIGH);   
   digitalWrite(pinF, HIGH);   
   digitalWrite(pinG, LOW);   
-  delay(1000);               
-}
- if(val==2){
+  delay(100000);               
+} else if(val==2){
  //0
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
   digitalWrite(D3, HIGH);
   digitalWrite(D4, LOW); 
  
@@ -562,8 +546,11 @@ void loop() {
   digitalWrite(pinD, HIGH);   
   digitalWrite(pinE, HIGH);   
   digitalWrite(pinF, HIGH);   
-  digitalWrite(pinG, LOW);   
-  delay(1000);   
+  digitalWrite(pinG, LOW); 
+
+  Serial.print("Force = \n");
+  Serial.print(fsrReading);  
+  delay(1000);
   }
   delay(10);
 }
